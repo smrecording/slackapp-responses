@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slack Webpage</title>
+    <script>
+        function handleSlackPayload() {
+            // Extract the payload from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const payload = urlParams.get('payload');
+
+            // Parse the payload as JSON
+            const payloadData = JSON.parse(decodeURIComponent(payload.replace('payload=', '')));
+
+            // Extract the "text" parameter
+            const messageText = payloadData.message.text;
+
+            // Construct the custom response URL
+            const customResponseURL = `https://smrecording.github.io/slackapp-responses/characters/${messageText}.html`;
+
+            // Redirect to the custom response URL
+            window.location.replace(customResponseURL);
+        }
+
+        // Call the function when the page loads
+        window.onload = handleSlackPayload;
+    </script>
+</head>
+<body>
+    <h1>Handling Slack Payload</h1>
+    <p>Redirecting to the custom response URL...</p>
+</body>
+</html>
